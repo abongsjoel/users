@@ -1,13 +1,13 @@
 import React from "react";
 
-const UserForm = () => {
+const UserForm = ({ onUserAdd }) => {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log({ name, email });
+    onUserAdd({ name, email });
   };
 
   return (
