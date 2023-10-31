@@ -1,17 +1,22 @@
 import { render, screen, within } from "@testing-library/react";
 import UserList from "./index";
 
-test("render one row per user", () => {
+const renderComponent = () => {
   const users = [
     { name: "Mascot", email: "mas@mas.com" },
     { name: "Faith", email: "faith@mas.com" },
   ];
   render(<UserList users={users} />);
 
+  return { users };
+};
+
+test("render one row per user", () => {
+  renderComponent();
+
   //   screen.logTestingPlaygroundURL();
 
   const rows = within(screen.getByTestId("users")).getAllByRole("row");
-
   expect(rows).toHaveLength(2);
 });
 
@@ -30,12 +35,7 @@ test("render one row per user 2", () => {
 });
 
 test("render the email and name of each user", () => {
-  const users = [
-    { name: "Mascot", email: "mas@mas.com" },
-    { name: "Faith", email: "faith@mas.com" },
-  ];
-
-  render(<UserList users={users} />);
+  const { users } = renderComponent();
 
   for (let user of users) {
     const name = screen.getByRole("cell", { name: user.name });
