@@ -4,7 +4,6 @@ import UserList from "./components/UserList";
 
 function App() {
   const [users, setUsers] = React.useState([]);
-  console.log({ users });
 
   const onUserAdd = (user) => {
     setUsers([...users, user]);
